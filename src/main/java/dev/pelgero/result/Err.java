@@ -61,6 +61,16 @@ public class Err<E, T> implements Result<E, T> {
     }
 
     @Override
+    public <U> Result<E, U> and(Result<E, U> andResult) {
+        return new Err<>(err);
+    }
+
+    @Override
+    public <F> Result<F, T> or(Result<F, T> orResult) {
+        return orResult;
+    }
+
+    @Override
     public String toString() {
         return "Err(" + err + ")";
     }

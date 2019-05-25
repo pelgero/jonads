@@ -14,24 +14,34 @@ public interface Result<E, T> {
     }
 
     boolean isOk();
+
     boolean isErr();
 
     <U> Result<E, U> map(Function<T, U> mappingFn);
+
     <F> Result<F, T> mapErr(Function<E, F> mappingFn);
 
     <U> Result<E, U> andThen(Function<T, Result<E, U>> mappingFn);
 
     T unwrap();
+
     E unwrapErr();
+
     T unwrapOr(T or);
+
     T unwrapOrElse(Function<E, T> elseFn);
 
+
+    <U> Result<E, U> and(Result<E, U> andResult);
+
+    <F> Result<F, T> or(Result<F, T> orResult);
+
     class IllegalUnwrap extends RuntimeException {
-        public IllegalUnwrap(String msg) {
+        IllegalUnwrap(String msg) {
             super(msg);
         }
 
-        public IllegalUnwrap(Throwable throwable) {
+        IllegalUnwrap(Throwable throwable) {
             super(throwable);
         }
     }

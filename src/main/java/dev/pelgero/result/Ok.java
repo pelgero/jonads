@@ -58,6 +58,16 @@ public class Ok<E, T> implements Result<E, T> {
     }
 
     @Override
+    public <U> Result<E, U> and(Result<E, U> andResult) {
+        return andResult;
+    }
+
+    @Override
+    public <F> Result<F, T> or(Result<F, T> orResult) {
+        return new Ok<>(ok);
+    }
+
+    @Override
     public String toString() {
         return "Ok(" + ok + ")";
     }

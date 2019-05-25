@@ -102,6 +102,24 @@ public class ResultTest {
     }
 
     @Test
+    public void and() {
+        assertThat(new Ok<>(2).and(new Ok<>(7)), is(new Ok<>(7)));
+        assertThat(new Ok<>(2).and(new Err<>(7)), is(new Err<>(7)));
+
+        assertThat(new Err<>(2).and(new Ok<>(7)), is(new Err<>(2)));
+        assertThat(new Err<>(2).and(new Err<>(7)), is(new Err<>(2)));
+    }
+
+    @Test
+    public void or() {
+        assertThat(new Ok<>(2).or(new Ok<>(7)), is(new Ok<>(2)));
+        assertThat(new Ok<>(2).or(new Err<>(7)), is(new Ok<>(2)));
+
+        assertThat(new Err<>(2).or(new Ok<>(7)), is(new Ok<>(7)));
+        assertThat(new Err<>(2).or(new Err<>(7)), is(new Err<>(7)));
+    }
+
+    @Test
     public void toString_() {
         assertThat(new Ok<>(2).toString(), is("Ok(2)"));
         assertThat(new Ok<>("hello, world!").toString(), is("Ok(hello, world!)"));
