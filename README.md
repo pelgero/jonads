@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.com/pelgero/jonads.svg?branch=master) 
+
 # Jonads
 
 Implementation of the `Result` monad in Java, based on Rust language standard implementation 
