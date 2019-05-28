@@ -1,6 +1,10 @@
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'jacoco'
+plugins {
+    id 'java'
+    id 'idea'
+    id 'jacoco'
+    id 'com.jfrog.bintray' version '1.8.4'
+    id 'maven-publish'
+}
 
 version = "1.0.0"
 group = 'dev.pelgero'
@@ -32,5 +36,85 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+javadoc.failOnError = false
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name 'MIT'
+            url "https://opensource.org/licenses/MIT"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "pelgero"
+            name "Robert Pelger"
+            email "pelgero@gmail.com"
+        }
+    }
+
+    scm {
+        url "https://github.com/pelgero/jonads"
+    }
+}
+
+publishing {
+    publications {
+        mavenPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+            groupId 'dev.pelgero'
+            artifactId 'jonads'
+            version '1.0.0'
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'Implementation of functional types (monads) in Java')
+                root.appendNode('name', 'Jonads')
+                root.appendNode('url', 'https://github.com/pelgero/jonads')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getProperty('bintray.user')
+    key = System.getProperty('bintray.key')
+    publications = ['mavenPublication']
+
+    pkg {
+        repo = 'maven'
+        name = 'jonads'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/pelgero/jonads.git'
+        version {
+            name = '1.0.0'
+            desc = '1.0.0'
+            released  = new Date()
+        }
+    }
+
+}
 
 

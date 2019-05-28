@@ -1,6 +1,6 @@
 package dev.pelgero;
 
-import dev.pelgero.result.*;
+import dev.pelgero.jonads.*;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;

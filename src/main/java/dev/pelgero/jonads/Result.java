@@ -1,4 +1,4 @@
-package dev.pelgero.result;
+package dev.pelgero.jonads;
 
 import java.util.function.*;
 
