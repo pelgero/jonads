@@ -1,7 +1,6 @@
 package dev.pelgero.result;
 
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public interface Result<E, T> {
 
@@ -35,6 +34,13 @@ public interface Result<E, T> {
     <U> Result<E, U> and(Result<E, U> andResult);
 
     <F> Result<F, T> or(Result<F, T> orResult);
+
+    <F> Result<F, T> orElse(Function<E, Result<F, T>> mappingFn);
+
+    default Result<E, T> inspect(Consumer<Result<E, T>> consumer) {
+        consumer.accept(this);
+        return this;
+    }
 
     class IllegalUnwrap extends RuntimeException {
         IllegalUnwrap(String msg) {

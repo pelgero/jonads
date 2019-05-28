@@ -120,6 +120,24 @@ public class ResultTest {
     }
 
     @Test
+    public void orElse() {
+        assertThat(new Ok<Integer, Integer>(2).orElse(err -> new Ok<>(err * 2)), is(new Ok<>(2)));
+        assertThat(new Err<Integer, Integer>(3).orElse(err -> new Ok<>(err * 2)), is(new Ok<>(6)));
+    }
+
+    @Test
+    public void inspect() {
+        String[] test = new String[]{"ok: ", "err: "};
+        Result<String, Integer> inspectedOk = new Ok<String, Integer>(2).inspect(result -> test[0] = test[0] + result);
+        Result<Integer, Integer> inspectedErr = new Err<Integer, Integer>(2).inspect(result -> test[1] = test[1] + result);
+
+        assertThat(inspectedOk, is(new Ok<>(2)));
+        assertThat(inspectedErr, is(new Err<>(2)));
+        assertThat(test[0], is("ok: Ok(2)"));
+        assertThat(test[1], is("err: Err(2)"));
+    }
+
+    @Test
     public void toString_() {
         assertThat(new Ok<>(2).toString(), is("Ok(2)"));
         assertThat(new Ok<>("hello, world!").toString(), is("Ok(hello, world!)"));

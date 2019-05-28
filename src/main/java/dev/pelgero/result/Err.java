@@ -71,6 +71,11 @@ public class Err<E, T> implements Result<E, T> {
     }
 
     @Override
+    public <F> Result<F, T> orElse(Function<E, Result<F, T>> mappingFn) {
+        return mappingFn.apply(err);
+    }
+
+    @Override
     public String toString() {
         return "Err(" + err + ")";
     }

@@ -68,6 +68,11 @@ public class Ok<E, T> implements Result<E, T> {
     }
 
     @Override
+    public <F> Result<F, T> orElse(Function<E, Result<F, T>> mappingFn) {
+        return new Ok<>(ok);
+    }
+
+    @Override
     public String toString() {
         return "Ok(" + ok + ")";
     }
