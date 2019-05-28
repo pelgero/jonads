@@ -3,8 +3,7 @@ package dev.pelgero;
 import dev.pelgero.result.*;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -152,6 +151,31 @@ public class ResultTest {
         Object val = "any";
         assertThat(new Ok<>(val).hashCode(), is(val.hashCode()));
         assertThat(new Err<>(val).hashCode(), is(val.hashCode()));
+    }
+
+    @Test
+    public void equals() {
+        Ok<Object, Integer> ok1 = new Ok<>(1);
+        Ok<Object, Integer> ok2 = new Ok<>(2);
+
+        Err<Integer, Object> err1 = new Err<>(1);
+        Err<Integer, Object> err2 = new Err<>(2);
+
+        assertThat(ok1, is(equalTo(ok1)));
+        assertThat(ok1, is(equalTo(new Ok<>(1))));
+        assertThat(ok1, is(not(equalTo(ok2))));
+        assertThat(ok1, is(not(equalTo(err1))));
+
+        assertThat(err1, is(equalTo(err1)));
+        assertThat(err1, is(equalTo(new Err<>(1))));
+        assertThat(err1, is(not(equalTo(err2))));
+        assertThat(err1, is(not(equalTo(ok1))));
+
+        assertThat(ok1, is(not(equalTo(null))));
+        assertThat(err1, is(not(equalTo(null))));
+
+        assertThat(ok1, is(not(equalTo("Ok(1)"))));
+        assertThat(err1, is(not(equalTo("Err(1)"))));
     }
 
 }
