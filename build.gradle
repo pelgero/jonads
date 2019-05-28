@@ -6,7 +6,7 @@ plugins {
     id 'maven-publish'
 }
 
-version = "1.0.0"
+version = "0.1.0"
 group = 'dev.pelgero'
 
 sourceCompatibility = 1.8
@@ -86,7 +86,7 @@ publishing {
             }
             groupId 'dev.pelgero'
             artifactId 'jonads'
-            version '1.0.0'
+            version '0.1.0'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'Implementation of functional types (monads) in Java')
@@ -109,8 +109,8 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'https://github.com/pelgero/jonads.git'
         version {
-            name = '1.0.0'
-            desc = '1.0.0'
+            name = '0.1.0'
+            desc = '0.1.0'
             released  = new Date()
         }
     }
