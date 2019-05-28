@@ -1,4 +1,5 @@
-![Build Status](https://travis-ci.com/pelgero/jonads.svg?branch=master) 
+[![Build Status](https://travis-ci.com/pelgero/jonads.svg?branch=master)](https://travis-ci.com/pelgero/jonads?branch=master)
+[![Coverage](https://codecov.io/gh/pelgero/jonads/branch/master/graphs/badge.svg)](https://codecov.io/gh/pelgero/jonads) 
 
 # Jonads
 
