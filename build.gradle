@@ -6,8 +6,8 @@ plugins {
     id 'maven-publish'
 }
 
-version = "0.1.0"
-group = 'dev.pelgero'
+version '0.1.1'
+group 'dev.pelgero'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -84,13 +84,13 @@ publishing {
             artifact javadocJar {
                 classifier "javadoc"
             }
-            groupId 'dev.pelgero'
-            artifactId 'jonads'
-            version '0.1.0'
+            groupId project.group
+            artifactId project.name
+            version project.version
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'Implementation of functional types (monads) in Java')
-                root.appendNode('name', 'Jonads')
+                root.appendNode('name', project.name)
                 root.appendNode('url', 'https://github.com/pelgero/jonads')
                 root.children().last() + pomConfig
             }
@@ -105,12 +105,12 @@ bintray {
 
     pkg {
         repo = 'maven'
-        name = 'jonads'
+        name = project.name
         licenses = ['MIT']
         vcsUrl = 'https://github.com/pelgero/jonads.git'
         version {
-            name = '0.1.0'
-            desc = '0.1.0'
+            name = project.version
+            desc = project.version
             released  = new Date()
         }
     }
