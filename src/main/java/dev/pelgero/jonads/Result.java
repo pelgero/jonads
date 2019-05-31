@@ -3,7 +3,7 @@ package dev.pelgero.jonads;
 import java.util.function.*;
 
 /**
- * Result<E, T> is the type used for returning and propagating errors. It is an interface with the implementations
+ * Result&lt;E, T&gt; is the type used for returning and propagating errors. It is an interface with the implementations
  * Ok(T), representing success and containing a value, and Err(E), representing error and containing an error value.
  *
  * A Result is basically a specific variant of an "Either" monad, containing either an ok-value or an error-value.
@@ -44,7 +44,7 @@ public interface Result<E, T> {
     boolean isErr();
 
     /**
-     * Applies the mapping function to the Ok-value, i.e. transforms T -> U when it is an Ok. Does nothing
+     * Applies the mapping function to the Ok-value, i.e. transforms T -&gt; U when it is an Ok. Does nothing
      * if this is an Err(E)
      *
      * @param mappingFn the value transforming function, applied to T
@@ -65,10 +65,10 @@ public interface Result<E, T> {
     <F> Result<F, T> mapErr(Function<E, F> mappingFn);
 
     /**
-     * Applies the mapping function to the Ok-value, i.e. transforms T -> Result<E, U>. Use this for chaining
+     * Applies the mapping function to the Ok-value, i.e. transforms T -&gt; Result&lt;E, U&gt;. Use this for chaining
      * operations that produce Results.
      *
-     * @param mappingFn the operation that takes T and returns a Result<E, U>
+     * @param mappingFn the operation that takes T and returns a Result&lt;E, U&gt;
      * @param <U> the new wrapped Ok-value type
      * @return either Err(E) or Ok(U)
      */

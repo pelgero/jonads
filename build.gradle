@@ -6,7 +6,7 @@ plugins {
     id 'maven-publish'
 }
 
-version '0.1.1'
+version '0.1.2'
 group 'dev.pelgero'
 
 sourceCompatibility = 1.8
