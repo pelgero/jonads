@@ -76,6 +76,11 @@ public class Err<E, T> implements Result<E, T> {
     }
 
     @Override
+    public <U> U fold(Function<E, U> errFold, Function<T, U> okFold) {
+        return errFold.apply(err);
+    }
+
+    @Override
     public String toString() {
         return "Err(" + err + ")";
     }

@@ -73,6 +73,11 @@ public class Ok<E, T> implements Result<E, T> {
     }
 
     @Override
+    public <U> U fold(Function<E, U> errFold, Function<T, U> okFold) {
+        return okFold.apply(ok);
+    }
+
+    @Override
     public String toString() {
         return "Ok(" + ok + ")";
     }

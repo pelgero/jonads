@@ -125,6 +125,12 @@ public class ResultTest {
     }
 
     @Test
+    public void fold() {
+        assertThat(new Ok<String, Integer>(12).fold(s -> s.length(), i -> i + 3), is(15));
+        assertThat(new Err<String, Integer>("error").fold(s -> s.length(), i -> i + 3), is(5));
+    }
+
+    @Test
     public void inspect() {
         String[] test = new String[]{"ok: ", "err: "};
         Result<String, Integer> inspectedOk = new Ok<String, Integer>(2).inspect(result -> test[0] = test[0] + result);

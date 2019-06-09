@@ -129,6 +129,16 @@ public interface Result<E, T> {
     <F> Result<F, T> orElse(Function<E, Result<F, T>> mappingFn);
 
     /**
+     * Folds this Result to type U, i.e. applying either okFold (if this is an Ok) or errFold (if this is an Err)
+     * Function and returning value of type U
+     * @param errFold function applied to value E if this is an Err
+     * @param okFold function applied to value T if this is an Ok
+     * @param <U> the returned value of type U
+     * @return a concrete value
+     */
+    <U> U fold(Function<E, U> errFold, Function<T, U> okFold);
+
+    /**
      * Applies given consumer on this Result and then returns this Result. Consumer should not modify this Result.
      * Mainly intended for debugging/inspection of this Result
      * @param consumer to be applied on this Result
